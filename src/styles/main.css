@@ -1,0 +1,607 @@
+
+
+/* ===== GLOBAL CSS ===== */
+
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 5px;
+}
+
+/* ===== NAVBAR ===== */
+
+.user-dropdown .dropdown-toggle::after {
+  display: none;
+}
+
+/* ===== ADD PRODUCT PAGE ===== */
+
+.add-product-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  padding-top: 40px;
+}
+
+.add-product-container {
+  max-width: 500px;
+  background: #49cd91;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.add-product-input {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.add-product-btn {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.add-product-btn:hover {
+  transform: scale(1.02);
+}
+
+.image-preview {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ===== ADMIN DASHBOARD ===== */
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #e3ebf6);
+}
+
+/* ===== SIDEBAR ===== */
+
+.admin-sidebar {
+  width: 230px;
+  background: #1e293b;
+  color: white;
+  padding: 20px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.sidebar-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-sidebar li {
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.admin-sidebar li:hover {
+  background: #334155;
+}
+
+.admin-sidebar .active {
+  background: #0ea5e9;
+}
+
+/* ===== MAIN CONTENT ===== */
+
+.admin-content {
+  flex: 1;
+  margin-left: 230px;
+  padding: 30px;
+}
+
+/* ===== TABLE ===== */
+
+.product-table {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.product-table thead {
+  background: #0ea5e9;
+  color: white;
+}
+
+.product-table th,
+.product-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px;
+}
+
+/* ===== BUTTONS ===== */
+
+.btn-update {
+  background: #0ea5e9;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.btn-update:hover {
+  background: #0284c7;
+}
+
+.btn-delete {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* ===== UPDATE PRODUCT PAGE ===== */
+
+.update-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #93b9e9, #e0e7f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-container {
+  background: rgb(136, 224, 69);
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.update-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.update-btn {
+  width: 100%;
+  background: #0ea5e9;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+}
+
+/* ===== DASHBOARD PAGE ===== */
+
+.dashboard-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #eef2f7);
+  padding: 40px;
+}
+.dashboard-page .row {
+  justify-content: center;
+}
+
+/* ===== TITLE ===== */
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* ===== CARD STYLE ===== */
+
+.dashboard-card {
+  border: none;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+}
+
+/* Different colors */
+
+.add-card {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.manage-card {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* Hover effect */
+
+.dashboard-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Text inside card */
+
+.dashboard-card h4 {
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Login page css =======================================*/
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+  background: #ffffff;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-card h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.form-control:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 6px rgba(255,152,0,0.5);
+}
+
+.login-btn {
+  background: linear-gradient(45deg, #ff9800, #ff5722);
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(45deg, #fb8c00, #e64a19);
+}
+
+a {
+  color: #ff5722;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Register page ka css ====================== */
+
+.register-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  background: #fff;
+}
+
+.register-card h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.form-control:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 5px rgba(255,152,0,0.5);
+}
+
+.register-btn {
+  background-color: #ff9800;
+  border: none;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.register-btn:hover {
+  background-color: #e68900;
+  transform: scale(1.02);
+}
+
+a {
+  text-decoration: none;
+  color: #ff9800;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* MyproFile css=================================== */
+
+.profile-container {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  background: #fff;
+}
+
+.profile-card h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.profile-card p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* My order.css ================================*/
+
+.orders-container {
+  padding: 40px;
+}
+
+.order-card {
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+  background: #fff;
+}
+
+.order-card p {
+  margin: 5px 0;
+}
+
+/* Navbar css page =============================*/
+
+.navbar .nav-link {
+  text-decoration: none !important;  /* underline remove */
+  color: #fff; /* default white text */
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none !important; /* hover underline remove */
+  color: #ffc107; /* optional: hover color */
+}
+
+/* Remove small dropdown arrow from Categories (or any dropdown) */
+.navbar .dropdown-toggle::after {
+  display: none;
+}
+
+/* Dropdown menu style */
+.navbar .dropdown-menu {
+  background-color: #4E342E; /* match navbar */
+  border: none;
+}
+
+.navbar .dropdown-item {
+  color: #fff;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #6d4c41; /* darken on hover */
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* Product card css ===========================================*/
+/* CARD */
+.product-card {
+  width: 18rem; /* ✅ SAME WIDTH */
+  border-radius: 16px;
+  overflow: hidden;
+  border: none;
+  background: linear-gradient(145deg, #efebeb, #e1d4d4); /* 🔥 unique bg */
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img {
+  height: 220px;
+  object-fit: cover;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.08);
+}
+
+/* BADGE */
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgb(190, 171, 171);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* TEXT */
+.product-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.product-desc {
+  font-size: 14px;
+  color: #666;
+  height: 40px;
+  overflow: hidden;
+}
+
+/* PRICE */
+.final-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.old-price {
+  margin-left: 10px;
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+/* BUTTON */
+.add-btn {
+  border-radius: 10px;
+}
+       
+
+/* Trending Product================================================= */
+
+/* 🔥 Section spacing (carousel ke just niche) */
+.trending-wrapper {
+  margin-top: 20px;   /* ज्यादा gap नहीं */
+}
+
+/* 🔥 Header */
+.trending-header {
+  margin-bottom: 15px;
+}
+
+.trending-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* View All */
+.view-all {
+  font-size: 14px;
+  color: #ff6b00;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* 🔥 Horizontal scroll */
+.trending-scroll {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar */
+.trending-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card wrapper */
+.trending-card {
+  min-width: 250px;
+}
+
+/* Hover effect */
+.trending-card:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+}
+
+/* Product/product.jsx========================================= */
+
+/* FULL WIDTH like navbar */
+.products-wrapper {
+  width: 100%;
+  padding: 10px 10px; /* thoda spacing */
+}
+
+/* Row margin reset (Bootstrap ka default hata diya) */
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
