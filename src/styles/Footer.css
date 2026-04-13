@@ -1,0 +1,51 @@
+/* FOOTER MAIN */
+.footer {
+  background: linear-gradient(135deg, #1e1e2f, #111);
+  color: #fff;
+  margin-top: 50px;
+}
+
+/* TEXT */
+.footer-text {
+  font-size: 14px;
+  color: #bbb;
+}
+
+/* LOGO */
+.footer-logo {
+  font-weight: bold;
+}
+
+/* LINKS */
+.footer-link {
+  display: block;
+  color: #bbb;
+  text-decoration: none;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+.footer-link:hover {
+  color: #ffb400;
+  transform: translateX(5px);
+}
+
+/* SOCIAL ICONS */
+.social-icons svg {
+  font-size: 20px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-icons svg:hover {
+  color: #ffb400;
+  transform: scale(1.2);
+}
+
+/* COPYRIGHT */
+.footer-copy {
+  text-align: center;
+  padding-bottom: 15px;
+  color: #aaa;
+}

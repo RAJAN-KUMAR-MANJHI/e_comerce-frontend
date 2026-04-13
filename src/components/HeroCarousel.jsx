@@ -9,7 +9,7 @@ export function HeroCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7"
+          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1600&q=80"
           alt="slide1"
           style={{ height: "420px", objectFit: "cover" }}
         />
@@ -23,7 +23,7 @@ export function HeroCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+          src="http://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1600&q=80"
           alt="slide2"
           style={{ height: "420px", objectFit: "cover" }}
         />
@@ -37,7 +37,7 @@ export function HeroCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920"
+          src="http://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80"
           alt="slide3"
           style={{ height: "420px", objectFit: "cover" }} />
         

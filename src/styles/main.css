@@ -470,7 +470,8 @@ a:hover {
 /* Product card css ===========================================*/
 /* CARD */
 .product-card {
-  width: 18rem; /* ✅ SAME WIDTH */
+  width: 16rem; /* ✅ SAME WIDTH */
+  margin: 3px;
   border-radius: 16px;
   overflow: hidden;
   border: none;
@@ -546,6 +547,7 @@ a:hover {
 /* 🔥 Section spacing (carousel ke just niche) */
 .trending-wrapper {
   margin-top: 20px;   /* ज्यादा gap नहीं */
+  
 }
 
 /* 🔥 Header */
@@ -583,7 +585,9 @@ a:hover {
 
 /* Card wrapper */
 .trending-card {
-  min-width: 250px;
+  /* min-width: 250px; */
+    flex: 0 0 auto;
+  margin-right: 0px;
 }
 
 /* Hover effect */
@@ -594,7 +598,14 @@ a:hover {
 
 /* Product/product.jsx========================================= */
 
-/* FULL WIDTH like navbar */
+
+/* full width like navbar */
+.products-wrapper {
+  width: 100%;
+  padding: 10px 5px; /* halka vertical spacing */
+}
+
+/* row full stretch */
 .products-wrapper {
   width: 100%;
   padding: 10px 10px; /* thoda spacing */

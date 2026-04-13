@@ -1,3 +1,4 @@
+// File: src/components/ProductCard.jsx
 
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
@@ -7,28 +8,45 @@ import Modal from "react-bootstrap/Modal";
 import "../styles/main.css";
 import api from "../api/axiosConfig";
 
-export function ProductCard({ product }) {
-
+export function ProductCard({ product, onCartUpdate }) {
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
 
-  const finalPrice = product.discount > 0
-    ? product.price - (product.price * product.discount) / 100
-    : product.price;
+  const finalPrice =
+    product.discount > 0
+      ? product.price - (product.price * product.discount) / 100
+      : product.price;
 
   const handleAddToCart = async () => {
+
+    // 🔥 DEBUG (important)
+    const userId = localStorage.getItem("userId");
+    console.log("USER ID:", userId);
+    console.log("TOKEN:", localStorage.getItem("token"));
+
+    if (!userId) {
+      alert("User not logged in!");
+      return;
+    }
+
     try {
       setLoading(true);
 
+      // 🔥 CORRECT API CALL (BODY METHOD)
       await api.post("/api/cart/add", {
+        userId: userId,
         productId: product.id,
         quantity: 1
       });
 
       alert("Added to cart ✅");
+
+      // refresh cart if needed
+      if (onCartUpdate) onCartUpdate();
+
     } catch (err) {
-      console.log(err);
-      alert("Failed ❌");
+      console.log("Add to cart error:", err);
+      alert("Failed to add to cart ❌");
     } finally {
       setLoading(false);
     }
@@ -37,8 +55,6 @@ export function ProductCard({ product }) {
   return (
     <>
       <Card className="product-card">
-
-        {/* Image */}
         <div className="img-wrapper">
           <Card.Img
             variant="top"
@@ -55,7 +71,6 @@ export function ProductCard({ product }) {
         </div>
 
         <Card.Body className="d-flex flex-column">
-
           <Card.Title className="product-title">
             {product.name}
           </Card.Title>
@@ -68,9 +83,7 @@ export function ProductCard({ product }) {
             <span className="final-price">₹ {finalPrice}</span>
 
             {product.discount > 0 && (
-              <span className="old-price">
-                ₹ {product.price}
-              </span>
+              <span className="old-price">₹ {product.price}</span>
             )}
           </div>
 
@@ -82,12 +95,16 @@ export function ProductCard({ product }) {
           >
             {loading ? "Adding..." : "Add To Cart"}
           </Button>
-
         </Card.Body>
       </Card>
 
-      {/* 🔥 IMAGE ZOOM MODAL */}
-      <Modal show={show} onHide={() => setShow(false)} centered size="lg">
+      {/* 🔍 IMAGE MODAL */}
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        centered
+        size="lg"
+      >
         <Modal.Body className="text-center">
           <img
             src={`http://localhost:8080/uploads/${product.image}`}

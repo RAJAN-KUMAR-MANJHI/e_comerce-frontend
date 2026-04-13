@@ -1,61 +1,65 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
+import "../styles/Footer.css"
 
 import { FaFacebook, FaInstagram, FaTwitter, FaPhone, FaEnvelope } from "react-icons/fa";
 
-export function Footer(){
-    return(
+export function Footer() {
+  return (
 
-        <>
-        
-         <footer style={{ backgroundColor: "#1bb50d", color: "white", marginTop: "40px" }}>
+    <footer className="footer">
+
       <Container>
 
-        <Row className="pt-4 pb-3">
+        <Row className="pt-5 pb-4">
 
           {/* Brand */}
           <Col md={3}>
-            <h4>🪑 FurniStore</h4>
-            <p>
-              Best furniture for your home. We provide modern,
-              stylish and comfortable furniture.
+            <h4 className="footer-logo">🪑 FurniStore</h4>
+            <p className="footer-text">
+              Modern, stylish and comfortable furniture for your dream home.
             </p>
           </Col>
 
           {/* Quick Links */}
           <Col md={3}>
             <h5>Quick Links</h5>
-            <p>Home</p>
-            <p>Products</p>
-            <p>Cart</p>
-            <p>Login</p>
+
+            <Link to="/" className="footer-link">Home</Link>
+            <Link to="/products" className="footer-link">Products</Link>
+            <Link to="/cart" className="footer-link">Cart</Link>
+            <Link to="/login" className="footer-link">Login</Link>
+
           </Col>
 
           {/* Categories */}
           <Col md={3}>
             <h5>Categories</h5>
-            <p>Chairs</p>
-            <p>Tables</p>
-            <p>Sofas</p>
-            <p>Beds</p>
+
+            <Link to="/category/1" className="footer-link">Chairs</Link>
+            <Link to="/category/2" className="footer-link">Tables</Link>
+            <Link to="/category/3" className="footer-link">Sofas</Link>
+            <Link to="/category/4" className="footer-link">Beds</Link>
+
           </Col>
 
           {/* Contact */}
           <Col md={3}>
             <h5>Contact Us</h5>
 
-            <p>
+            <p className="footer-text">
               <FaPhone /> +91 9876543210
             </p>
 
-            <p>
+            <p className="footer-text">
               <FaEnvelope /> support@furnistore.com
             </p>
 
-            <div style={{ fontSize: "20px" }}>
-              <FaFacebook style={{ marginRight: "10px" }} />
-              <FaInstagram style={{ marginRight: "10px" }} />
+            <div className="social-icons">
+              <FaFacebook />
+              <FaInstagram />
               <FaTwitter />
             </div>
 
@@ -63,19 +67,14 @@ export function Footer(){
 
         </Row>
 
-        <hr style={{ borderColor: "white" }} />
+        <hr />
 
-        <p style={{ textAlign: "center", paddingBottom: "10px" }}>
+        <p className="footer-copy">
           © 2026 FurniStore | All Rights Reserved
         </p>
 
       </Container>
+
     </footer>
-        
-        
-        
-        </>
-
-
-    )
+  );
 }

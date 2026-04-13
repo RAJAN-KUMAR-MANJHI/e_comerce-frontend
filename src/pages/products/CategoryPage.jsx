@@ -38,7 +38,12 @@ export function CategoryPage(){
           products.map((prod) => (
             <Col md={4} key={prod.id} className="mb-3">
               <Card>
-                <Card.Img variant="top" src={prod.image} />
+                {/* <Card.Img variant="top" src={prod.image} /> */}
+                <Card.Img
+                     variant="top"
+                     src={`http://localhost:8080/uploads/${prod.image}`}
+                      style={{ height: "200px", objectFit: "cover" }}
+                     />
                 <Card.Body>
                   <Card.Title>{prod.name}</Card.Title>
                   <Card.Text>₹ {prod.finalPrice}</Card.Text>

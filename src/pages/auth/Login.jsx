@@ -41,9 +41,23 @@ export function Login() {
 });
 
       // ✅ token save
-      localStorage.setItem("token", "Bearer " + res.data.token);
-      localStorage.setItem("role", res.data.role);
+      // localStorage.setItem("token", "Bearer " + res.data.token);
+      // localStorage.setItem("userId", res.data.id);
+      // localStorage.setItem("role", res.data.role);
 
+      // ✅ token save
+                   localStorage.setItem("token", "Bearer " + res.data.token);
+
+              // 🔥 FIXED USER ID
+               const userId = res.data.id || res.data.user?.id;
+
+                //console.log("FULL RESPONSE:", res.data);
+              //  console.log("FINAL USER ID:", userId);
+
+               localStorage.setItem("userId", userId);
+                 localStorage.setItem("role", res.data.role);
+                // console.log("FULL RESPONSE:", res.data);
+      
       alert("Login Successful ✅");
 
       // ✅ Redirect (optional but recommended)

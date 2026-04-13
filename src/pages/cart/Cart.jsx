@@ -1,101 +1,102 @@
-
 import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 import { Button } from "react-bootstrap";
 import "../../styles/cart.css";
 
 export function Cart() {
-
   const [cartItems, setCartItems] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetchCart();
+    if (userId) {
+      fetchCart();
+    } else {
+      console.log("User not logged in");
+    }
   }, []);
 
   const fetchCart = async () => {
     try {
-      const res = await api.get("/api/cart");
-      setCartItems(res.data);
+      const res = await api.get(`/api/cart/${userId}`);
+
+      console.log("RAW CART RESPONSE:", res.data);
+
+      const items = res.data?.items || [];
+
+      setCartItems(items);
+
+      // total price calculate
+      const totalAmount = items.reduce(
+        (sum, item) => sum + item.product.finalPrice * item.quantity,
+        0
+      );
+
+      setTotal(totalAmount);
     } catch (err) {
-      console.log(err);
+      console.log("Cart fetch error:", err);
     }
   };
 
-  const handleRemove = async (id) => {
+  const handleRemove = async (productId) => {
     try {
-      await api.delete(`/api/cart/remove/${id}`);
+      await api.delete(
+        `/api/cart/remove?userId=${userId}&productId=${productId}`
+      );
       fetchCart();
     } catch (err) {
       console.log(err);
     }
   };
 
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.product.finalPrice * item.quantity,
-    0
-  );
+  const handleClear = async () => {
+    try {
+      await api.delete(`/api/cart/clear/${userId}`);
+      fetchCart();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="cart-page">
+      <h2>🛒 Your Cart</h2>
 
-      <h2 className="cart-title">🛒 Your Cart</h2>
+      {cartItems.length === 0 ? (
+        <h4>Cart is empty</h4>
+      ) : (
+        cartItems.map((item) => (
+          <div key={item.id} className="cart-card">
 
-      <div className="cart-container">
+            <img
+              src={`http://localhost:8080/uploads/${item.product.image}`}
+              width="100"
+            />
 
-        {/* LEFT SIDE */}
-        <div className="cart-items">
+            <div>
+              <h5>{item.product.name}</h5>
+              <p>₹ {item.product.finalPrice}</p>
+              <p>Qty: {item.quantity}</p>
 
-          {cartItems.length === 0 ? (
-            <h4 className="empty-text">Your cart is empty 😢</h4>
-          ) : (
-            cartItems.map((item) => (
+              <Button
+                variant="danger"
+                onClick={() => handleRemove(item.product.id)}
+              >
+                Remove
+              </Button>
+            </div>
+          </div>
+        ))
+      )}
 
-              <div className="cart-card" key={item.id}>
+      <hr />
 
-                <img
-                  src={`http://localhost:8080/uploads/${item.product.image}`}
-                  className="cart-img"
-                />
+      <h3>Total: ₹ {total}</h3>
 
-                <div className="cart-details">
-                  <h5>{item.product.name}</h5>
-                  <p>{item.product.description}</p>
-
-                  <h6>₹ {item.product.finalPrice}</h6>
-
-                  <span>Qty: {item.quantity}</span>
-                </div>
-
-                <Button
-                  variant="danger"
-                  onClick={() => handleRemove(item.id)}
-                >
-                  Remove
-                </Button>
-
-              </div>
-
-            ))
-          )}
-
-        </div>
-
-        {/* RIGHT SIDE (SUMMARY) */}
-        <div className="cart-summary">
-
-          <h4>Order Summary</h4>
-
-          <p>Total Items: {cartItems.length}</p>
-          <h3>₹ {totalPrice}</h3>
-
-          <Button className="checkout-btn">
-            Proceed to Checkout
-          </Button>
-
-        </div>
-
-      </div>
-
+      <Button variant="warning" onClick={handleClear}>
+        Clear Cart
+      </Button>
     </div>
   );
 }

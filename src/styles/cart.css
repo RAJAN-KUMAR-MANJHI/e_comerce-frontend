@@ -1,92 +1,155 @@
+/* =========================
+   CART PAGE WRAPPER
+========================= */
 
-/* PAGE BG */
 .cart-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa, #e4e8f0);
   padding: 30px;
+  max-width: 1100px;
+  margin: auto;
+  font-family: "Segoe UI", sans-serif;
+  background: #f7f7f7;
+  min-height: 100vh;
 }
 
-/* TITLE */
-.cart-title {
-  font-weight: bold;
+.cart-page h2 {
+  font-size: 28px;
+  font-weight: 700;
   margin-bottom: 20px;
+  color: #222;
 }
 
-/* LAYOUT */
-.cart-container {
-  display: flex;
-  gap: 20px;
+/* =========================
+   EMPTY CART
+========================= */
+
+.cart-page h4 {
+  text-align: center;
+  color: #888;
+  margin-top: 50px;
 }
 
-/* LEFT SIDE */
-.cart-items {
-  flex: 3;
-}
+/* =========================
+   CART ITEM CARD
+========================= */
 
-/* CARD */
 .cart-card {
   display: flex;
   align-items: center;
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
+  justify-content: space-between;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
   margin-bottom: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: 0.3s;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: 0.3s ease;
 }
 
 .cart-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
-/* IMAGE */
-.cart-img {
-  width: 120px;
-  height: 100px;
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+.cart-card img {
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   border-radius: 10px;
+  border: 1px solid #eee;
 }
 
-/* DETAILS */
-.cart-details {
-  flex: 1;
-  margin-left: 15px;
-}
+/* =========================
+   PRODUCT INFO
+========================= */
 
-.cart-details h5 {
+.cart-card h5 {
+  font-size: 18px;
   font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
 }
 
-.cart-details p {
+.cart-card p {
+  margin: 0;
   font-size: 14px;
   color: #666;
 }
 
-/* SUMMARY */
+/* PRICE */
+.cart-card p:nth-child(2) {
+  font-weight: 600;
+  color: #000;
+  margin-top: 5px;
+}
+
+/* =========================
+   REMOVE BUTTON
+========================= */
+
+.cart-card button {
+  background: linear-gradient(135deg, #ff4d4d, #ff1a1a);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.cart-card button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+/* =========================
+   CART FOOTER / SUMMARY
+========================= */
+
 .cart-summary {
-  flex: 1;
-  background: white;
+  margin-top: 30px;
+  background: #fff;
   padding: 20px;
-  border-radius: 15px;
-  height: fit-content;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 .cart-summary h3 {
-  margin: 15px 0;
+  font-size: 22px;
+  color: #111;
+  margin-bottom: 15px;
 }
 
-/* BUTTON */
-.checkout-btn {
+/* CLEAR CART BUTTON */
+.cart-summary .btn-warning {
   width: 100%;
   padding: 10px;
-  border-radius: 10px;
-  background: black;
+  font-weight: 600;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ffcc00, #ff9900);
   border: none;
 }
 
-/* EMPTY */
-.empty-text {
-  text-align: center;
-  margin-top: 50px;
+.cart-summary .btn-warning:hover {
+  transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(255, 153, 0, 0.4);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+  .cart-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cart-card img {
+    width: 100%;
+    height: 180px;
+  }
 }
