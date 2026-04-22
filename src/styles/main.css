@@ -1,5 +1,8 @@
 
 
+
+
+
 /* ===== GLOBAL CSS ===== */
 
 ::-webkit-scrollbar {
@@ -407,23 +410,7 @@ a:hover {
   margin-bottom: 10px;
 }
 
-/* My order.css ================================*/
 
-.orders-container {
-  padding: 40px;
-}
-
-.order-card {
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 12px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-.order-card p {
-  margin: 5px 0;
-}
 
 /* Navbar css page =============================*/
 
@@ -615,4 +602,119 @@ a:hover {
 .row {
   margin-left: 0 !important;
   margin-right: 0 !important;
+}
+
+/* -------------------myorder.css----------------------- */
+
+.orders-container {
+  max-width: 950px;
+  margin: auto;
+  padding: 20px;
+}
+
+.orders-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* CARD */
+.order-card {
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-4px);
+}
+
+/* HEADER */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-id {
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-date {
+  font-size: 13px;
+  color: gray;
+}
+
+/* META */
+.order-meta {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* ITEM */
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 0;
+  border-top: 1px solid #eee;
+}
+
+.product-img {
+  width: 90px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #f8f8f8;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.item-details p {
+  margin: 4px 0;
+  color: #666;
+}
+
+.item-price {
+  font-weight: 600;
+  width: 100px;
+}
+
+.item-actions button {
+  font-size: 12px;
+}
+
+/* ACTIONS */
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* EMPTY */
+.empty-box {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+}
+
+.loader {
+  text-align: center;
+  margin-top: 40px;
 }

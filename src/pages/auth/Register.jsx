@@ -24,7 +24,7 @@ export function Register(){
     e.preventDefault(); // ✅ important
 
     try {
-      await api.post("/auth/register", form);
+      await api.post("/api/auth/register", form);
 
       alert("Registration Successful ✅");
 

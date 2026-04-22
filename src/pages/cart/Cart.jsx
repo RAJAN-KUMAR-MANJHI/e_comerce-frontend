@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 import { Button } from "react-bootstrap";
 import "../../styles/cart.css";
+import { getImageUrl } from "../../utils/config";
 
 export function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -70,7 +71,7 @@ export function Cart() {
           <div key={item.id} className="cart-card">
 
             <img
-              src={`http://localhost:8080/uploads/${item.product.image}`}
+              src={getImageUrl(item.product.image)}
               width="100"
             />
 

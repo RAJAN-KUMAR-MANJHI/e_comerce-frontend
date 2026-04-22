@@ -35,6 +35,9 @@ export function Navbarr() {
   // ================= FETCH CART COUNT =================
   const fetchCartCount = async () => {
     try {
+        console.log("USER ID:", userId);
+             console.log("TOKEN CHECK (Navbar):", localStorage.getItem("token"));
+
       if (!userId) return;
 
       const res = await api.get(`/api/cart/${userId}`);
@@ -57,6 +60,7 @@ export function Navbarr() {
 
   // ================= USE EFFECT =================
   useEffect(() => {
+    console.log("TOKEN CHECK (Navbar):", localStorage.getItem("token"));
     fetchCategories();
     fetchCartCount();
   }, []);

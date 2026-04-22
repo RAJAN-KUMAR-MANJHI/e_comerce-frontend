@@ -1,9 +1,11 @@
-
-
 import { useState } from "react";
 import { Container, Form, Button, Image } from "react-bootstrap";
 import api from "../../api/axiosConfig";
 import "../../styles/main.css";
+
+// ✅ BASE URL from env (no hardcode anywhere)
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export function AddProduct() {
 
   const [name, setName] = useState("");
@@ -14,6 +16,7 @@ export function AddProduct() {
   const [imageFile, setImageFile] = useState(null);
   const [preview, setPreview] = useState(null);
 
+  // ---------------- SUBMIT ----------------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -22,20 +25,26 @@ export function AddProduct() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("stock", stock);
-    formData.append("description", description);
-    formData.append("category", category);
-    formData.append("imageFile", imageFile);
-
     try {
-      await api.post("/api/products", formData);
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("price", price);
+      formData.append("stock", stock);
+      formData.append("description", description);
+      formData.append("category", category);
+      formData.append("imageFile", imageFile);
+
+      // ✅ API CALL (no hardcoded URL)
+      await api.post("/api/products", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
 
       alert("Product Added ✅");
 
-      // Reset
+      // reset
       setName("");
       setPrice("");
       setStock("");
@@ -50,103 +59,102 @@ export function AddProduct() {
     }
   };
 
+  // ---------------- IMAGE PREVIEW ----------------
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImageFile(file);
-    setPreview(URL.createObjectURL(file));
+
+    if (file) {
+      setImageFile(file);
+      setPreview(URL.createObjectURL(file));
+    }
   };
 
   return (
-   <>
-   <div className="add-product-page">  {/* ✅ background */}
+    <div className="add-product-page">
 
-    <Container className="add-product-container"> {/* ✅ box */}
+      <Container className="add-product-container">
 
-      <h3 className="add-product-title">Add Product</h3>
+        <h3 className="add-product-title">Add Product</h3>
 
-      <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
 
-        {/* Name */}
-        <Form.Group className="mb-3">
-          <Form.Label>Product Name</Form.Label>
-          <Form.Control
-            className="add-product-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Group>
+          {/* NAME */}
+          <Form.Group className="mb-3">
+            <Form.Label>Product Name</Form.Label>
+            <Form.Control
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
 
-        {/* Price */}
-        <Form.Group className="mb-3">
-          <Form.Label>Price</Form.Label>
-          <Form.Control
-            type="number"
-            className="add-product-input"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </Form.Group>
+          {/* PRICE */}
+          <Form.Group className="mb-3">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </Form.Group>
 
-        {/* Stock */}
-        <Form.Group className="mb-3">
-          <Form.Label>Stock</Form.Label>
-          <Form.Control
-            type="number"
-            className="add-product-input"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-          />
-        </Form.Group>
+          {/* STOCK */}
+          <Form.Group className="mb-3">
+            <Form.Label>Stock</Form.Label>
+            <Form.Control
+              type="number"
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
+            />
+          </Form.Group>
 
-        {/* Category */}
-        <Form.Group className="mb-3">
-          <Form.Label>Category</Form.Label>
-          <Form.Select
-            className="add-product-input"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">-- Select Category --</option>
-            <option value="Chair">Chair</option>
-            <option value="Sofa">Sofa</option>
-            <option value="Table">Table</option>
-            <option value="Bed">Bed</option>
-          </Form.Select>
-        </Form.Group>
+          {/* CATEGORY */}
+          <Form.Group className="mb-3">
+            <Form.Label>Category</Form.Label>
+            <Form.Select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">-- Select Category --</option>
+              <option value="Chair">Chair</option>
+              <option value="Sofa">Sofa</option>
+              <option value="Table">Table</option>
+              <option value="Bed">Bed</option>
+            </Form.Select>
+          </Form.Group>
 
-        {/* Description */}
-        <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            className="add-product-input"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Form.Group>
+          {/* DESCRIPTION */}
+          <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
 
-        {/* Image */}
-        <Form.Group className="mb-3">
-          <Form.Label>Product Image</Form.Label>
-          <Form.Control type="file" onChange={handleImageChange} />
-        </Form.Group>
+          {/* IMAGE */}
+          <Form.Group className="mb-3">
+            <Form.Label>Product Image</Form.Label>
+            <Form.Control type="file" onChange={handleImageChange} />
+          </Form.Group>
 
-        {preview && (
-          <div className="image-preview">
-            <Image src={preview} height={150} rounded />
-          </div>
-        )}
+          {/* PREVIEW */}
+          {preview && (
+            <div className="image-preview">
+              <Image src={preview} height={150} rounded />
+            </div>
+          )}
 
-        <Button type="submit" className="add-product-btn" variant="success">
-          Add Product
-        </Button>
+          {/* SUBMIT */}
+          <Button type="submit" className="add-product-btn" variant="success">
+            Add Product
+          </Button>
 
-      </Form>
+        </Form>
 
-    </Container>
-  </div>
-   
-   </>
+      </Container>
+
+    </div>
   );
 }

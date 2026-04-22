@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Form, Button, Image } from "react-bootstrap";
 import api from "../../api/axiosConfig";
+import { getImageUrl } from "../../utils/config";
 import "../../styles/main.css";
 
 export function UpdateProduct() {
@@ -38,7 +39,7 @@ export function UpdateProduct() {
     setCategoryId(data.category?.id);
 
     // existing image preview
-    setPreview(`http://localhost:8080/uploads/${data.image}`);
+    setPreview(`${BASE_URL}/uploads/${data.image}`);
   };
 
   const handleImageChange = (e) => {

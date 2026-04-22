@@ -46,17 +46,18 @@ export function Login() {
       // localStorage.setItem("role", res.data.role);
 
       // ✅ token save
-                   localStorage.setItem("token", "Bearer " + res.data.token);
+                   localStorage.setItem("token", res.data.token);
 
               // 🔥 FIXED USER ID
                const userId = res.data.id || res.data.user?.id;
-
-                //console.log("FULL RESPONSE:", res.data);
-              //  console.log("FINAL USER ID:", userId);
+                 console.log(localStorage.getItem("token"));
+                console.log("FULL RESPONSE:", res.data);
+                console.log("FINAL USER ID:", userId);
 
                localStorage.setItem("userId", userId);
                  localStorage.setItem("role", res.data.role);
-                // console.log("FULL RESPONSE:", res.data);
+                 console.log("FULL RESPONSE:", res.data);
+                 window.location.reload();
       
       alert("Login Successful ✅");
 
