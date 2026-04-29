@@ -50,7 +50,7 @@ export function Footer() {
             <h5>Contact Us</h5>
 
             <p className="footer-text">
-              <FaPhone /> +91 9876543210
+              <FaPhone /> +91 7870849283
             </p>
 
             <p className="footer-text">

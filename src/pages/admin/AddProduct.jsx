@@ -32,7 +32,7 @@ export function AddProduct() {
       formData.append("price", price);
       formData.append("stock", stock);
       formData.append("description", description);
-      formData.append("category", category);
+      formData.append("categoryId", Number(category));
       formData.append("imageFile", imageFile);
 
       // ✅ API CALL (no hardcoded URL)
@@ -55,6 +55,8 @@ export function AddProduct() {
 
     } catch (err) {
       console.log(err);
+      console.log("BACKEND ERROR 👉", err.response?.data);
+        console.log("STATUS 👉", err.response?.status);
       alert("Error adding product ❌");
     }
   };
@@ -115,10 +117,10 @@ export function AddProduct() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">-- Select Category --</option>
-              <option value="Chair">Chair</option>
-              <option value="Sofa">Sofa</option>
-              <option value="Table">Table</option>
-              <option value="Bed">Bed</option>
+              <option value="1">Chair</option>
+              <option value="2">Sofa</option>
+              <option value="3">Table</option>
+              <option value="4">Bed</option>
             </Form.Select>
           </Form.Group>
 

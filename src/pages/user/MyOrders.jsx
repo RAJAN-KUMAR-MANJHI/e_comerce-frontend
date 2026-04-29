@@ -112,7 +112,7 @@ export function MyOrders() {
                 <img
                   src={img}
                   alt=""
-                  className="product-img"
+                  className="order-img"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = "/default-product.png";

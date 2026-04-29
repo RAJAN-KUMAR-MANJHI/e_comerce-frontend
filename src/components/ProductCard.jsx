@@ -1,16 +1,16 @@
+
+
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Modal from "react-bootstrap/Modal";
 import "../styles/main.css";
-import api from "../api/axiosConfig";
 import { getImageUrl } from "../utils/config";
+import api from "../api/axiosConfig";
 
-export function ProductCard({ product, onCartUpdate, onBuyNow }) {
+export function ProductCard({ product }) {
 
-  const [loadingCart, setLoadingCart] = useState(false);
-  const [loadingBuy, setLoadingBuy] = useState(false);
   const [show, setShow] = useState(false);
 
   const finalPrice =
@@ -18,69 +18,51 @@ export function ProductCard({ product, onCartUpdate, onBuyNow }) {
       ? product.price - (product.price * product.discount) / 100
       : product.price;
 
-  // ---------------- ADD TO CART ----------------
+  // ✅ ADD TO CART
   const handleAddToCart = async () => {
-    
-    console.log("TOKEN CHECK (Add to Cart):", localStorage.getItem("token"));
-
-    const userId = localStorage.getItem("userId");
-
-    if (!userId) {
-      alert("User not logged in!");
-      return;
-    }
-
     try {
-      setLoadingCart(true);
+      const userId = localStorage.getItem("userId");
+
+      if (!userId) {
+        alert("Please login first");
+        return;
+      }
 
       await api.post("/api/cart/add", {
-        userId,
-        productId: product.id,
-        quantity: 1
+        userId: userId,
+        productId: product._id || product.id,
+        quantity: 1,
       });
+      window.dispatchEvent(new Event("cartUpdated"));
+      localStorage.setItem("cartUpdated", Date.now());
 
-      alert("Added to cart ✅");
-
-      if (onCartUpdate) onCartUpdate();
-
+      alert("Product added to cart ✅");
     } catch (err) {
-      console.log(err);
-      alert("Failed to add to cart ❌");
-    } finally {
-      setLoadingCart(false);
+      console.log("ERROR:", err.response?.data || err.message);
+      alert("Error adding to cart ❌");
     }
   };
 
-  // ---------------- BUY NOW ----------------
+  // ✅ BUY NOW
   const handleBuyNow = async () => {
-
-    const userId = localStorage.getItem("userId");
-
-    if (!userId) {
-      alert("User not logged in!");
-      return;
-    }
-
     try {
-      setLoadingBuy(true);
+      const userId = localStorage.getItem("userId");
 
-      const res = await api.post("/api/orders/buy-now", {
-        userId,
-        productId: product.id,
+      if (!userId) {
+        alert("Please login first");
+        return;
+      }
+
+      await api.post("/api/cart/add", {
+        userId: userId,
+        productId: product._id || product.id,
         quantity: 1,
-        address: "Default Address",
-        paymentMethod: "COD"
       });
 
-      alert("Order placed successfully 🎉");
-
-      if (onBuyNow) onBuyNow(res.data);
-
+      alert("Product ready to buy ✅");
     } catch (err) {
-      console.log(err);
-      alert("Buy failed ❌");
-    } finally {
-      setLoadingBuy(false);
+      console.log("ERROR:", err.response?.data || err.message);
+      alert("Error in buy now ❌");
     }
   };
 
@@ -88,12 +70,11 @@ export function ProductCard({ product, onCartUpdate, onBuyNow }) {
     <>
       <Card className="product-card">
 
-        {/* IMAGE */}
         <div className="img-wrapper">
-          <Card.Img
-            variant="top"
+          <img
             src={getImageUrl(product.image)}
             className="product-img"
+            alt={product.name}
             onClick={() => setShow(true)}
           />
 
@@ -104,55 +85,48 @@ export function ProductCard({ product, onCartUpdate, onBuyNow }) {
           )}
         </div>
 
-        {/* BODY */}
-        <Card.Body className="d-flex flex-column">
+        <Card.Body className="product-body">
 
-          <Card.Title>{product.name}</Card.Title>
+          <div className="product-title">{product.name}</div>
+          <div className="product-desc">{product.description}</div>
 
-          <Card.Text>{product.description}</Card.Text>
-
-          {/* IMPORTANT INFO */}
-          <div className="mb-2">
-            <div><b>Stock:</b> {product.stock}</div>
-            <div><b>Category:</b> {product.category?.name || "N/A"}</div>
+          <div className="product-meta">
+            Stock: {product.stock}
           </div>
 
-          <div className="mb-3">
-            <span className="final-price">₹ {finalPrice}</span>
-
+          <div className="price-box">
+            <span className="final-price">₹{finalPrice}</span>
             {product.discount > 0 && (
-              <span className="old-price">₹ {product.price}</span>
+              <span className="old-price">₹{product.price}</span>
             )}
           </div>
 
-          {/* ACTION BUTTONS */}
           <Button
             variant="dark"
             className="w-100 mb-2"
             onClick={handleAddToCart}
-            disabled={loadingCart}
           >
-            {loadingCart ? "Adding..." : "Add To Cart"}
+            Add To Cart
           </Button>
 
           <Button
             variant="success"
             className="w-100"
             onClick={handleBuyNow}
-            disabled={loadingBuy}
           >
-            {loadingBuy ? "Processing..." : "Buy Now"}
+            Buy Now
           </Button>
 
         </Card.Body>
       </Card>
 
-      {/* IMAGE MODAL */}
-      <Modal show={show} onHide={() => setShow(false)} centered size="lg">
-        <Modal.Body className="text-center">
+      {/* MODAL */}
+      <Modal show={show} onHide={() => setShow(false)} centered>
+        <Modal.Body className="modal-body-custom">
           <img
             src={getImageUrl(product.image)}
-            style={{ width: "100%", borderRadius: "12px" }}
+            className="modal-img"
+            alt="product"
           />
         </Modal.Body>
       </Modal>

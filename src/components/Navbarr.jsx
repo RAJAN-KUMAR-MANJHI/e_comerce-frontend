@@ -33,10 +33,11 @@ export function Navbarr() {
   };
 
   // ================= FETCH CART COUNT =================
-  const fetchCartCount = async () => {
+     const fetchCartCount = async () => {
     try {
-        console.log("USER ID:", userId);
-             console.log("TOKEN CHECK (Navbar):", localStorage.getItem("token"));
+      const userId = localStorage.getItem("userId");
+
+      console.log("USER ID:", userId);
 
       if (!userId) return;
 
@@ -49,6 +50,31 @@ export function Navbarr() {
       console.log("Cart count error:", err);
     }
   };
+
+  // ================= SINGLE USEEFFECT =================
+  useEffect(() => {
+    fetchCategories();
+    fetchCartCount();
+
+    // 🔥 SAME TAB UPDATE
+    const handleCartUpdate = () => {
+      fetchCartCount();
+    };
+
+    window.addEventListener("cartUpdated", handleCartUpdate);
+
+    // 🔥 OTHER TAB UPDATE
+    const handleStorage = () => {
+      fetchCartCount();
+    };
+
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener("cartUpdated", handleCartUpdate);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
 
   // ================= LOGOUT =================
   const logout = () => {

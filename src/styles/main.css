@@ -473,13 +473,16 @@ a:hover {
 
 /* IMAGE */
 .img-wrapper {
+  width: 100%;
+  height: 200px;
   position: relative;
   overflow: hidden;
 }
 
 .product-img {
-  height: 220px;
-  object-fit: cover;
+   width: 100%;
+  height: 100%; 
+   object-fit: cover; 
   transition: 0.4s;
   cursor: pointer;
 }
@@ -527,7 +530,14 @@ a:hover {
 .add-btn {
   border-radius: 10px;
 }
-       
+
+  .product-img {
+  width: 100% !important;   /* 🔥 THIS FIXES WIDTH */
+  height: 100% !important;
+  object-fit: cover;
+  display: block; 
+  
+}     
 
 /* Trending Product================================================= */
 
@@ -624,7 +634,7 @@ a:hover {
   padding: 20px;
   margin-bottom: 20px;
   border: none;
-  background: #fff;
+  background: #edd4d4;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
 }
@@ -647,7 +657,7 @@ a:hover {
 
 .order-date {
   font-size: 13px;
-  color: gray;
+  color: rgb(115, 111, 111);
 }
 
 /* META */
@@ -667,13 +677,13 @@ a:hover {
   border-top: 1px solid #eee;
 }
 
-.product-img {
-  width: 90px;
-  height: 80px;
+.order-img {
+  width: 80px;
+  height: 70px;
   object-fit: cover;
   border-radius: 10px;
-  border: 1px solid #eee;
-  background: #f8f8f8;
+  border: 1px solid #752525;
+  background: #ebdbdb;
 }
 
 .item-details {
@@ -687,7 +697,7 @@ a:hover {
 
 .item-details p {
   margin: 4px 0;
-  color: #666;
+  color: #030f12e2;
 }
 
 .item-price {

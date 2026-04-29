@@ -1,42 +1,30 @@
-
 import { Container } from "react-bootstrap";
 import { ProductCard } from "./ProductCard";
-import "../styles/main.css"
+import "../styles/main.css";
 
 export function TrendingProducts({ products }) {
 
   return (
-
     <div className="trending-wrapper">
 
-      <Container fluid className="px-4">
+      <Container fluid className="px-2">
 
-        {/* Heading */}
-        <div className="trending-header d-flex justify-content-between align-items-center">
-
-          <h2 className="trending-title">
-            🔥 Trending Products
-          </h2>
-
-          <span className="view-all">View All</span>
-
+        <div className="trending-header">
+          <h3>🔥 Trending Products</h3>
         </div>
 
-        {/* Scroll Section */}
+        {/* 🔥 HORIZONTAL SCROLL */}
         <div className="trending-scroll">
 
-          {products.slice(0, 8).map((product) => (
-
-            <div key={product.id} className="trending-card">
-              <ProductCard product={product} />
+          {products.slice(0, 10).map((p) => (
+            <div key={p.id} className="scroll-card">
+              <ProductCard product={p} />
             </div>
-
           ))}
 
         </div>
 
       </Container>
-
     </div>
   );
 }

@@ -18,43 +18,64 @@ export function Cart() {
     }
   }, []);
 
+  // ================= FETCH CART =================
   const fetchCart = async () => {
     try {
       const res = await api.get(`/api/cart/${userId}`);
 
-      console.log("RAW CART RESPONSE:", res.data);
-
       const items = res.data?.items || [];
+
+      // 🔥 DEBUG LOGS (IMPORTANT)
+      console.log("RAW CART RESPONSE:", res.data);
+      console.log("CART ITEMS ARRAY:", items);
+      console.log("FIRST ITEM SAMPLE:", items[0]);
 
       setCartItems(items);
 
-      // total price calculate
       const totalAmount = items.reduce(
         (sum, item) => sum + item.product.finalPrice * item.quantity,
         0
       );
 
       setTotal(totalAmount);
+
     } catch (err) {
       console.log("Cart fetch error:", err);
     }
   };
 
+  // ================= REMOVE ITEM =================
   const handleRemove = async (productId) => {
     try {
+      console.log("REMOVE CLICKED PRODUCT ID:", productId);
+
+      if (!productId) {
+        console.log("❌ PRODUCT ID IS UNDEFINED");
+        return;
+      }
+
       await api.delete(
         `/api/cart/remove?userId=${userId}&productId=${productId}`
       );
+
       fetchCart();
+
+      // 🔥 NAVBAR SYNC
+      window.dispatchEvent(new Event("cartUpdated"));
+
     } catch (err) {
-      console.log(err);
+      console.log("REMOVE ERROR:", err);
     }
   };
 
+  // ================= CLEAR CART =================
   const handleClear = async () => {
     try {
       await api.delete(`/api/cart/clear/${userId}`);
       fetchCart();
+
+      window.dispatchEvent(new Event("cartUpdated"));
+
     } catch (err) {
       console.log(err);
     }
@@ -68,11 +89,19 @@ export function Cart() {
         <h4>Cart is empty</h4>
       ) : (
         cartItems.map((item) => (
-          <div key={item.id} className="cart-card">
+
+          <div
+            key={item.id}
+            className="cart-card"
+          >
+
+            {/* 🔥 DEBUG PER ITEM (optional) */}
+            {console.log("RENDER ITEM:", item)}
 
             <img
               src={getImageUrl(item.product.image)}
               width="100"
+              alt="product"
             />
 
             <div>
@@ -80,12 +109,20 @@ export function Cart() {
               <p>₹ {item.product.finalPrice}</p>
               <p>Qty: {item.quantity}</p>
 
+              {/* 🔥 REMOVE BUTTON (SAFE ID HANDLING) */}
               <Button
                 variant="danger"
-                onClick={() => handleRemove(item.product.id)}
+                onClick={() =>
+                  handleRemove(
+                    item.product.id ||
+                    item.product.productId ||
+                    item.product._id
+                  )
+                }
               >
                 Remove
               </Button>
+
             </div>
           </div>
         ))
